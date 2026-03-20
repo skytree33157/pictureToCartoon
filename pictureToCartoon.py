@@ -1,13 +1,19 @@
 import cv2 as cv
 import numpy as np
+from tkinter import filedialog
+def select_image():
+    file_path = filedialog.askopenfilename(
+        filetypes=[("Image files", "*.jpg *.png")]
+    )
+    return file_path
 
 # 이미지 로드
-img = cv.imread('img.jpg')
+img = cv.imread(select_image())
 
 # 흑백 전환
 gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 # 블러 처리
-gray = cv.medianBlur(gray, 9)
+gray = cv.medianBlur(gray, 3)
 #외곽선 검출
 edges = cv.Canny(gray, 0,150)
 #팽창으로 외곽선을 더 굵게
